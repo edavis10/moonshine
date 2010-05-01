@@ -1,10 +1,9 @@
 // Automatically upgrade packages from these (origin, archive) pairs
 Unattended-Upgrade::Allowed-Origins {
-<% case %>
-<% when Facter.lsbdistid == 'Ubuntu' %>
+<% if Facter.lsbdistid == 'Ubuntu' %>
 	"Ubuntu intrepid-security";
 //	"Ubuntu intrepid-updates";
-<% when Facter.operatingsystem == 'Debian' %>
+<% elsif Facter.operatingsystem == 'Debian' %>
 	"Debian stable";
 <% end %>
 };
