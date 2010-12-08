@@ -8,7 +8,7 @@ module Moonshine::Manifest::Rails::Mysql
     package 'mysql-server', :ensure => :installed
     service 'mysql', :ensure => :running, :require => [
       package('mysql-server'),
-      package('mysql')
+      package('mysql-common')
     ]
 
     # ensure the mysql key is present on the configuration hash
