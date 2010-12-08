@@ -82,7 +82,7 @@ private
     exec("a2ensite #{site}", {
         :command => "/usr/sbin/a2ensite #{site}",
         :unless => "ls /etc/apache2/sites-enabled/#{site}",
-        :require => package("apache2-mpm-worker"),
+        :require => package("apache2-mpm-prefork"),
         :notify => service("apache2")
       }.merge(options)
     )
@@ -95,7 +95,7 @@ private
     exec("a2dissite #{site}", {
         :command => "/usr/sbin/a2dissite #{site}",
         :onlyif => "ls /etc/apache2/sites-enabled/#{site}",
-        :require => package("apache2-mpm-worker"),
+        :require => package("apache2-mpm-prefork"),
         :notify => service("apache2")
       }.merge(options)
     )
@@ -108,7 +108,7 @@ private
     exec("a2enmod #{mod}", {
         :command => "/usr/sbin/a2enmod #{mod}",
         :unless => "ls /etc/apache2/mods-enabled/#{mod}.load",
-        :require => package("apache2-mpm-worker"),
+        :require => package("apache2-mpm-prefork"),
         :notify => service("apache2")
       }.merge(options)
     )
@@ -121,7 +121,7 @@ private
     exec("a2dismod #{mod}", {
         :command => "/usr/sbin/a2enmod #{mod}",
         :onlyif => "ls /etc/apache2/mods-enabled/#{mod}.load",
-        :require => package("apache2-mpm-worker"),
+        :require => package("apache2-mpm-prefork"),
         :notify => service("apache2")
       }.merge(options)
     )
