@@ -16,8 +16,8 @@ module Moonshine::Manifest::Rails::Apache
   # Installs Apache 2.2 and enables mod_rewrite and mod_status. Enables mod_ssl
   # if <tt>configuration[:ssl]</tt> is present
   def apache_server
-    package "apache2-mpm-worker", :ensure => :installed
-    service "apache2", :require => package("apache2-mpm-worker"), :restart => '/etc/init.d/apache2 restart', :ensure => :running
+    package "apache2-mpm-prefork", :ensure => :installed
+    service "apache2", :require => package("apache2-mpm-prefork"), :restart => '/etc/init.d/apache2 restart', :ensure => :running
     a2enmod('rewrite')
     a2enmod('status')
     a2enmod('expires')
@@ -46,7 +46,7 @@ module Moonshine::Manifest::Rails::Apache
       :ensure => :present,
       :content => apache2_conf,
       :mode => '644',
-      :require => package('apache2-mpm-worker'),
+      :require => package('apache2-mpm-prefork'),
       :notify => service('apache2')
 
     status = <<-STATUS
