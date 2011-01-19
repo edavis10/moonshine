@@ -42,7 +42,7 @@ module Moonshine::Manifest::Rails::Passenger
         ].join(" && "),
       :require => [
         package("passenger"),
-        package("apache2-mpm-worker"),
+        package("apache2-mpm-prefork"),
         package("apache2-threaded-dev"),
         exec('symlink_passenger')
       ]
