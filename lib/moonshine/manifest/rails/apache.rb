@@ -65,7 +65,7 @@ STATUS
       :ensure => :present,
       :content => template(rails_template_dir.join('apache.envvars.erb'), binding),
       :mode => '644',
-      :require => package('apache2-mpm-worker'),
+      :require => package('apache2-mpm-prefork'),
       :notify => service('apache2')
 
     file '/etc/apache2/mods-available/status.conf',
